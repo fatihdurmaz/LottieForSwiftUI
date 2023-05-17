@@ -26,7 +26,7 @@ https://github.com/fatihdurmaz/LottieForSwiftUI
 
 ```swift
 import SwiftUI
-import SwiftUILottiePaketi
+import LottieForSwiftUI
 
 struct ContentView: View {
     var body: some View {
