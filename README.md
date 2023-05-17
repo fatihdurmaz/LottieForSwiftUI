@@ -1,3 +1,42 @@
-# LottieForSwiftUI
+SwiftUI Lottie Animasyon Paketi
+Bu Swift paketi, SwiftUI uygulamalarında Lottie animasyonlarını kolayca kullanmanızı sağlar. Lottie animasyon dosyalarınızı projenize ekleyin ve bu paketi kullanarak animasyonları görüntüleyin.
 
-A description of this package.
+Özellikler
+Lottie animasyonlarını SwiftUI uygulamalarında kullanma
+Animasyon dosyasını görüntülemek için basit bir yapılandırma
+Döngü modunu özelleştirme seçeneği
+Gereksinimler
+Swift 5 veya sonraki sürümü
+iOS 15.0 veya sonraki sürümü
+Lottie kütüphanesi
+Kurulum
+Bu paketi projenize Swift Package Manager aracılığıyla dahil edebilirsiniz. Xcode projesinde "File" -> "Swift Packages" -> "Add Package Dependency" seçeneklerini kullanarak aşağıdaki URL'yi ekleyin:
+https://github.com/fatihdurmaz/LottieForSwiftUI
+
+Kullanım
+Paketi projenize dahil ettikten sonra, aşağıdaki gibi LottieView'yi kullanarak animasyonları görüntüleyebilirsiniz:
+
+import SwiftUI
+import SwiftUILottiePaketi
+
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            LottieView(fileName: "animasyon_dosya_adi", loopMode: .loop)
+                .frame(width: 200, height: 200)
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+LottieView yapısının fileName parametresine Lottie animasyon dosyanızın adını verin. İsteğe bağlı olarak, loopMode parametresini de belirleyebilirsiniz. Bu parametre, animasyonun nasıl tekrarlanacağını kontrol etmek için kullanılır. Varsayılan olarak .loop değerini alır.
+Lisans
+Bu paket MIT Lisansı altında lisanslanmıştır.
+
+Katkıda Bulunma
+Geliştirmeye katkıda bulunmak isterseniz, lütfen bir çekme isteği gönderin veya konu açın. Her türlü katkıya açığız!
