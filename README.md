@@ -17,8 +17,9 @@ Bu Swift paketi, SwiftUI uygulamalarında Lottie animasyonlarını kolayca kulla
 ## Kurulum
 
 Bu paketi projenize Swift Package Manager aracılığıyla dahil edebilirsiniz. Xcode projesinde "File" -> "Swift Packages" -> "Add Package Dependency" seçeneklerini kullanarak aşağıdaki URL'yi ekleyin:
-
+```url
 https://github.com/fatihdurmaz/LottieForSwiftUI
+```
 
 
 ## Kullanım/Örnekler
