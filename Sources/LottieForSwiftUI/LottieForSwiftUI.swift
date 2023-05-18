@@ -2,11 +2,17 @@ import SwiftUI
 import Lottie
 
 public struct LottieView: UIViewRepresentable {
-    var fileName: String
+    var fileName: String?
+    var url: URL?
     var loopMode: LottieLoopMode = .loop
 
     public init(fileName: String, loopMode: LottieLoopMode = .loop) {
         self.fileName = fileName
+        self.loopMode = loopMode
+    }
+    
+    public init(fileURL: String, loopMode: LottieLoopMode = .loop) {
+        self.url = URL(string: fileURL)
         self.loopMode = loopMode
     }
 
@@ -14,11 +20,23 @@ public struct LottieView: UIViewRepresentable {
         let view = UIView(frame: .zero)
 
         let animationView = LottieAnimationView()
-        let animation = LottieAnimation.named(fileName)
-        animationView.animation = animation
-        animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = loopMode
-        animationView.play()
+        var animation: LottieAnimation?
+        
+        if let fileName = fileName {
+            animation = LottieAnimation.named(fileName)
+        } else if let url = url {
+            animation = LottieAnimation.filepath(url.path)
+        }
+        
+        if let animation = animation {
+            animationView.animation = animation
+            animationView.contentMode = .scaleAspectFit
+            animationView.loopMode = loopMode
+            animationView.play()
+        } else {
+            // Eksik dosya adı veya URL
+            // İstediğiniz hata işleme veya varsayılan davranışı burada gerçekleştirebilirsiniz.
+        }
 
         animationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(animationView)
@@ -34,3 +52,5 @@ public struct LottieView: UIViewRepresentable {
         // Güncelleme gerektiren durumlar için gerekli kodlar
     }
 }
+
+
