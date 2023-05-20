@@ -31,7 +31,12 @@ import LottieForSwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
+            // yerel dosyayı çağırmak için
             LottieView(fileName: "animasyon_dosya_adi", loopMode: .loop)
+                .frame(width: 200, height: 200)
+                
+            // url den çağırmak için
+            LottieView(url:URL(string: "example.com/animation.json")!, loopMode: .loop)
                 .frame(width: 200, height: 200)
         }
     }
