@@ -2,11 +2,17 @@ import SwiftUI
 import Lottie
 
 public struct LottieView: UIViewRepresentable {
-    var fileName: String
+    var fileName: String?
+    var url: URL?
     var loopMode: LottieLoopMode = .loop
 
     public init(fileName: String, loopMode: LottieLoopMode = .loop) {
         self.fileName = fileName
+        self.loopMode = loopMode
+    }
+    
+    public init(url: URL, loopMode: LottieLoopMode = .loop) {
+        self.url = url
         self.loopMode = loopMode
     }
 
@@ -14,8 +20,15 @@ public struct LottieView: UIViewRepresentable {
         let view = UIView(frame: .zero)
 
         let animationView = LottieAnimationView()
-        let animation = LottieAnimation.named(fileName)
-        animationView.animation = animation
+        if let url = url {
+            LottieAnimation.loadedFrom(url: url, closure:{ animation in
+                animationView.animation = animation
+            }, animationCache: DefaultAnimationCache.sharedCache)
+            
+        } else if let fileName = fileName {
+            let animation = LottieAnimation.named(fileName)
+            animationView.animation = animation
+        }
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = loopMode
         animationView.play()
@@ -34,4 +47,3 @@ public struct LottieView: UIViewRepresentable {
         // Güncelleme gerektiren durumlar için gerekli kodlar
     }
 }
-
