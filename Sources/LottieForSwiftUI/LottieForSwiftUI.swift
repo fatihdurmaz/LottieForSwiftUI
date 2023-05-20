@@ -21,9 +21,9 @@ public struct LottieView: UIViewRepresentable {
 
         let animationView = LottieAnimationView()
         if let url = url {
-            LottieAnimation.loadedFrom(url: url) { animation in
+            LottieAnimation.loadedFrom(url: url, closure:{ animation in
                 animationView.animation = animation
-            }
+            }, animationCache: DefaultAnimationCache.sharedCache)
             
         } else if let fileName = fileName {
             let animation = LottieAnimation.named(fileName)
