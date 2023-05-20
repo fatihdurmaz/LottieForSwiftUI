@@ -20,18 +20,26 @@ public struct LottieView: UIViewRepresentable {
         let view = UIView(frame: .zero)
 
         let animationView = LottieAnimationView()
+
         if let url = url {
-            LottieAnimation.loadedFrom(url: url, closure:{ animation in
-                animationView.animation = animation
-            }, animationCache: DefaultAnimationCache.sharedCache)
-            
+            animationView.animation = nil // Animasyonu boş olarak ayarla
+            animationView.contentMode = .scaleAspectFit
+            animationView.loopMode = loopMode
+
+            // Animasyonu asenkron olarak yükle
+            LottieAnimation.loadedFrom(url: url) { animation in
+                DispatchQueue.main.async {
+                    animationView.animation = animation
+                    animationView.play()
+                }
+            }
         } else if let fileName = fileName {
             let animation = LottieAnimation.named(fileName)
             animationView.animation = animation
+            animationView.contentMode = .scaleAspectFit
+            animationView.loopMode = loopMode
+            animationView.play()
         }
-        animationView.contentMode = .scaleAspectFit
-        animationView.loopMode = loopMode
-        animationView.play()
 
         animationView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(animationView)
@@ -42,6 +50,7 @@ public struct LottieView: UIViewRepresentable {
 
         return view
     }
+
 
     public func updateUIView(_ uiView: UIView, context: Context) {
         // Güncelleme gerektiren durumlar için gerekli kodlar
